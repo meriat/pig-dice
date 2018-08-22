@@ -31,6 +31,7 @@ $(document).ready(function() {
     }
 
     playerOne.getTurnScore();
+
     console.log(newDice.diceValue)
     console.log(playerOne.turnScore);
   });
@@ -41,6 +42,7 @@ $(document).ready(function() {
       $("#rollDiceTwo").hide();
     }
     playerTwo.getTurnScore();
+
     console.log(newDice.diceValue)
     console.log(playerTwo.turnScore);
   });
@@ -49,16 +51,19 @@ $(document).ready(function() {
     // console.log(playerOne.totalScore);
     if (playerOne.turnScore === 0) {
       playerTwo.getTotalScore();
+      if (playerTwo.totalScore >= 20) {alert ("Player Two Won!" )}
       $("#rollDiceOne").show();
       $("#rollDiceTwo").hide();
       $("#playerTwoTotal").text(playerTwo.totalScore);
     }
     else {
       playerOne.getTotalScore();
+      if (playerOne.totalScore >= 20) {alert ("Player One Won!" )}
       $("#rollDiceOne").hide();
       $("#rollDiceTwo").show();
       $("#playerOneTotal").text(playerOne.totalScore);
-
     }
   });
+
+
 });
