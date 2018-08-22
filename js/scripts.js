@@ -17,6 +17,7 @@ Player.prototype.getTotalScore = function () {
   this.totalScore += this.turnScore;
   this.turnScore = 0;
 }
+
 var playerOne = new Player("1");
 var playerTwo = new Player("2");
 var newDice = new Dice();
@@ -24,12 +25,21 @@ var newDice = new Dice();
 $(document).ready(function() {
   $("#rollDiceOne").click(function() {
     newDice.rollDice();
+    if (newDice.diceValue === 1) {
+      $("#rollDiceOne").hide();
+      $("#rollDiceTwo").show();
+    }
+
     playerOne.getTurnScore();
     console.log(newDice.diceValue)
     console.log(playerOne.turnScore);
   });
   $("#rollDiceTwo").click(function() {
     newDice.rollDice();
+    if (newDice.diceValue === 1) {
+      $("#rollDiceOne").show();
+      $("#rollDiceTwo").hide();
+    }
     playerTwo.getTurnScore();
     console.log(newDice.diceValue)
     console.log(playerTwo.turnScore);
