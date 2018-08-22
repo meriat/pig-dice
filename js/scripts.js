@@ -6,29 +6,49 @@ function Player(id) {
 function Dice() {
   this.diceValue = 0;
 }
-Dice.prototype.rollDice= function(playerId) {
+Dice.prototype.rollDice= function() {
   this.diceValue = Math.floor(Math.random()* 6) +1;
 }
 
 Player.prototype.getTurnScore = function () {
   this.turnScore = (newDice.diceValue === 1) ? (this.turnScore = 0) : (this.turnScore += newDice.diceValue);
 }
-Player.prototype.getCurrentScore = function () {
-playerOne.totalScore += playerOne.turnScore;
+Player.prototype.getTotalScore = function () {
+  this.totalScore += this.turnScore;
+  this.turnScore = 0;
 }
 var playerOne = new Player("1");
 var playerTwo = new Player("2");
 var newDice = new Dice();
 
 $(document).ready(function() {
-  $("#rollDice").click(function() {
+  $("#rollDiceOne").click(function() {
     newDice.rollDice();
     playerOne.getTurnScore();
     console.log(newDice.diceValue)
     console.log(playerOne.turnScore);
   });
+  $("#rollDiceTwo").click(function() {
+    newDice.rollDice();
+    playerTwo.getTurnScore();
+    console.log(newDice.diceValue)
+    console.log(playerTwo.turnScore);
+  });
   $("#hold").click(function() {
-    playerOne.getCurrentScore();
-    console.log(playerOne.totalScore);
+
+    // console.log(playerOne.totalScore);
+    if (playerOne.turnScore === 0) {
+      playerTwo.getTotalScore();
+      $("#rollDiceOne").show();
+      $("#rollDiceTwo").hide();
+      $("#playerTwoTotal").text(playerTwo.totalScore);
+    }
+    else {
+      playerOne.getTotalScore();
+      $("#rollDiceOne").hide();
+      $("#rollDiceTwo").show();
+      $("#playerOneTotal").text(playerOne.totalScore);
+
+    }
   });
 });
