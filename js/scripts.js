@@ -7,10 +7,13 @@ function Player(id) {
 function Dice() {
   this.diceValue = 0;
 }
-Dice.prototype.rollDice= function() {
+Dice.prototype.rollDice= function(playerId) {
   this.diceValue = Math.floor(Math.random()* 6) +1;
 }
 
+Player.prototype.getTurnScore = function () {
+  this.turnScore += newDice.diceValue;
+}
 var playerOne = new Player("1");
 var playerTwo = new Player("2");
 var newDice = new Dice();
@@ -18,6 +21,8 @@ var newDice = new Dice();
 $(document).ready(function() {
   $("#rollDice").click(function() {
     newDice.rollDice();
-    console.log(newDice.diceValue);
+    playerOne.getTurnScore();
+    console.log(newDice.diceValue)
+    console.log(playerOne.turnScore);
   });
 });
