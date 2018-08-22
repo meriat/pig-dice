@@ -1,7 +1,6 @@
 function Player(id) {
   this.id = id;
   this.totalScore = 0;
-  this.currentScore = 0;
   this.turnScore = 0;
 }
 function Dice() {
@@ -13,13 +12,9 @@ Dice.prototype.rollDice= function(playerId) {
 
 Player.prototype.getTurnScore = function () {
   this.turnScore = (newDice.diceValue === 1) ? (this.turnScore = 0) : (this.turnScore += newDice.diceValue);
-  // if (newDice.diceValue === 1) {
-  //   this.turnScore =0;
-  // }
-  // else
-  // {
-  //   this.turnScore += newDice.diceValue;
-  // }
+}
+Player.prototype.getCurrentScore = function () {
+playerOne.totalScore += playerOne.turnScore;
 }
 var playerOne = new Player("1");
 var playerTwo = new Player("2");
@@ -31,5 +26,9 @@ $(document).ready(function() {
     playerOne.getTurnScore();
     console.log(newDice.diceValue)
     console.log(playerOne.turnScore);
+  });
+  $("#hold").click(function() {
+    playerOne.getCurrentScore();
+    console.log(playerOne.totalScore);
   });
 });
