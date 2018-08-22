@@ -17,52 +17,52 @@ Player.prototype.getTotalScore = function () {
   this.totalScore += this.turnScore;
   this.turnScore = 0;
 }
-
 var playerOne = new Player("1");
 var playerTwo = new Player("2");
 var newDice = new Dice();
+var holdAndSwitch = function() {
+  if (playerOne.turnScore === 0) {
+    playerTwo.getTotalScore();
+    if (playerTwo.totalScore >= 20) {alert ("Player Two Won!" )}
+    $("#rollDiceOne").show();
+    $("#rollDiceTwo").hide();
+    $("#playerTwoTotal").text(playerTwo.totalScore);
 
+  }
+  else {
+    playerOne.getTotalScore();
+    if (playerOne.totalScore >= 20) {alert ("Player One Won!" )}
+    $("#rollDiceOne").hide();
+    $("#rollDiceTwo").show();
+    $("#playerOneTotal").text(playerOne.totalScore);
+  }
+}
+var currentPlayer = {};
 $(document).ready(function() {
+  if ($("#rollDiceOne").click)
   $("#rollDiceOne").click(function() {
     newDice.rollDice();
     if (newDice.diceValue === 1) {
-      $("#rollDiceOne").hide();
+      $(this).hide();
       $("#rollDiceTwo").show();
     }
-
     playerOne.getTurnScore();
     $("#diceValues").text(newDice.diceValue);
     $("#playerOneTurn").text(playerOne.turnScore);
   });
+
   $("#rollDiceTwo").click(function() {
     newDice.rollDice();
     if (newDice.diceValue === 1) {
       $("#rollDiceOne").show();
-      $("#rollDiceTwo").hide();
+      $(this).hide();
     }
     playerTwo.getTurnScore();
     $("#diceValues").text(newDice.diceValue);
     $("#playerTwoTurn").text(playerTwo.turnScore);
   });
+
   $("#hold").click(function() {
-
-    // console.log(playerOne.totalScore);
-    if (playerOne.turnScore === 0) {
-      playerTwo.getTotalScore();
-      if (playerTwo.totalScore >= 20) {alert ("Player Two Won!" )}
-      $("#rollDiceOne").show();
-      $("#rollDiceTwo").hide();
-      $("#playerTwoTotal").text(playerTwo.totalScore);
-
-    }
-    else {
-      playerOne.getTotalScore();
-      if (playerOne.totalScore >= 20) {alert ("Player One Won!" )}
-      $("#rollDiceOne").hide();
-      $("#rollDiceTwo").show();
-      $("#playerOneTotal").text(playerOne.totalScore);
-    }
+    holdAndSwitch();
   });
-
-
 });
