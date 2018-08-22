@@ -31,9 +31,8 @@ $(document).ready(function() {
     }
 
     playerOne.getTurnScore();
-
-    console.log(newDice.diceValue)
-    console.log(playerOne.turnScore);
+    $("#diceValues").text(newDice.diceValue);
+    $("#playerOneTurn").text(playerOne.turnScore);
   });
   $("#rollDiceTwo").click(function() {
     newDice.rollDice();
@@ -42,9 +41,8 @@ $(document).ready(function() {
       $("#rollDiceTwo").hide();
     }
     playerTwo.getTurnScore();
-
-    console.log(newDice.diceValue)
-    console.log(playerTwo.turnScore);
+    $("#diceValues").text(newDice.diceValue);
+    $("#playerTwoTurn").text(playerTwo.turnScore);
   });
   $("#hold").click(function() {
 
@@ -55,6 +53,7 @@ $(document).ready(function() {
       $("#rollDiceOne").show();
       $("#rollDiceTwo").hide();
       $("#playerTwoTotal").text(playerTwo.totalScore);
+
     }
     else {
       playerOne.getTotalScore();
