@@ -12,7 +12,14 @@ Dice.prototype.rollDice= function(playerId) {
 }
 
 Player.prototype.getTurnScore = function () {
-  this.turnScore += newDice.diceValue;
+  this.turnScore = (newDice.diceValue === 1) ? (this.turnScore = 0) : (this.turnScore += newDice.diceValue);
+  // if (newDice.diceValue === 1) {
+  //   this.turnScore =0;
+  // }
+  // else
+  // {
+  //   this.turnScore += newDice.diceValue;
+  // }
 }
 var playerOne = new Player("1");
 var playerTwo = new Player("2");
